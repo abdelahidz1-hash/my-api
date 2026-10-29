@@ -19,9 +19,11 @@ app = Flask(__name__)
 def home():
     return jsonify({"status": "ok", "service": "LIKE API", "endpoints": ["/like", "/remain"]})
 
-# ✅ Valid API keys
+# ✅ Valid API keys (تم إضافة free و freebot لكي تتوافق مع البوت ولا تعطي خطأ 401)
 VALID_API_KEYS = {
-    "SUJEET"  # don't change warna api or bot dono nhi chalega 
+    "SUJEET",
+    "free",
+    "freebot"
 }
 
 # 🔢 Like limit tracking
@@ -169,8 +171,8 @@ def make_request(encrypt, region, token):
 def handle_requests():
     global used_count  # ✅ fix added
 
-    # ✅ API key check
-    api_key = request.args.get("key")
+    # ✅ API key check (إذا لم يتم إرسال المفتاح، نعتبره free افتراضياً لمنع خطأ 401)
+    api_key = request.args.get("key", "free")
     if api_key not in VALID_API_KEYS:
         result = OrderedDict([
             ("error", "Invalid or missing API key"),
@@ -184,7 +186,9 @@ def handle_requests():
 
     uid = request.args.get("uid")
     region = request.args.get("region", "").upper()
-    if not uid or not region:
+    if not region:
+        region = "BD"  # تعيين قيمة افتراضية للريجون إذا لم تُرسل لضمان عدم حدوث خطأ
+    if not uid:
         return {"error": "UID and region are required"}, 400
 
     try:
