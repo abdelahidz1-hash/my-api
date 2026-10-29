@@ -7,7 +7,7 @@ from xCore import *
 
 urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
-BOT_TOKEN = "8755706800:AAH_CNENWb-GA2BYN4SWUl9CYFYmSQj7nbU"
+BOT_TOKEN = "9217763166:AAEJW2mxUf6aByZoX9TQ1zIG2n5nhyuDheA"
 bot = telebot.TeleBot(BOT_TOKEN)
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
