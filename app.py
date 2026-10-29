@@ -36,7 +36,7 @@ def load_tokens(region):
         if region == "IND":
             with open("token_ind.json", "r") as f:
                 tokens = json.load(f)
-        elif region in {"BR", "US", "SAC", "NA"}:
+        elif region in {"BR", "US", "SAC", "NA", "ME"}:
             with open("token_br.json", "r") as f:
                 tokens = json.load(f)
         else:
@@ -273,3 +273,4 @@ def remain_info():
 
 if __name__ == '__main__':
     app.run(debug=True, use_reloader=False)
+    
